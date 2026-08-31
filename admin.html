@@ -1,0 +1,703 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Sakshi Rise Multimedia</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+
+        /* =========================================
+           ADMIN DASHBOARD
+        ========================================= */
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+        }
+
+        .admin-wrapper {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* SIDEBAR */
+
+        .admin-sidebar {
+            width: 250px;
+            background: #111827;
+            color: white;
+            padding: 25px 18px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        .admin-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            margin-bottom: 30px;
+        }
+
+        .admin-brand img {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            object-fit: contain;
+            background: white;
+        }
+
+        .admin-brand h2 {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        .admin-brand span {
+            display: block;
+            font-size: 11px;
+            color: #9ca3af;
+            margin-top: 3px;
+        }
+
+        .admin-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .admin-menu button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            background: transparent;
+            color: #d1d5db;
+            text-align: left;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .admin-menu button:hover,
+        .admin-menu button.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* MAIN */
+
+        .admin-main {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+            padding: 30px;
+        }
+
+        /* TOP BAR */
+
+        .admin-topbar {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .admin-topbar h1 {
+            margin: 0;
+            font-size: 22px;
+            color: #111827;
+        }
+
+        .admin-topbar p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .owner-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .owner-profile img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2563eb;
+        }
+
+        .owner-profile strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .owner-profile small {
+            color: #6b7280;
+        }
+
+        /* STAT CARDS */
+
+        .stats {
+            display: grid;
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-card span {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .stat-card h2 {
+            margin: 8px 0 0;
+            font-size: 28px;
+            color: #111827;
+        }
+
+        /* CONTENT */
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 22px;
+        }
+
+        .dashboard-card h3 {
+            margin: 0 0 18px;
+            font-size: 16px;
+            color: #111827;
+        }
+
+        .employee-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .employee-row:last-child {
+            border-bottom: none;
+        }
+
+        .employee-info strong {
+            display: block;
+            font-size: 13px;
+        }
+
+        .employee-info small {
+            color: #6b7280;
+            font-size: 11px;
+        }
+
+        .status {
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .status.present {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status.leave {
+            background: #fef3c7;
+            color: #a16207;
+        }
+
+        /* LOGOUT */
+
+        .logout-btn {
+            margin-top: 30px;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            background: transparent;
+            color: #d1d5db;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            border-color: #dc2626;
+            color: white;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .admin-sidebar {
+                width: 210px;
+            }
+
+            .admin-main {
+                margin-left: 210px;
+                width: calc(100% - 210px);
+                padding: 20px;
+            }
+
+            .stats {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .admin-sidebar {
+                position: relative;
+                width: 100%;
+                min-height: auto;
+            }
+
+            .admin-wrapper {
+                display: block;
+            }
+
+            .admin-main {
+                margin-left: 0;
+                width: 100%;
+                padding: 15px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="admin-wrapper">
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-brand">
+
+            <img src="sakhi.png"
+                 alt="Sakshi Rise Multimedia">
+
+            <div>
+
+                <h2>Sakshi Rise</h2>
+
+                <span>
+                    Multimedia
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <nav class="admin-menu">
+
+            <button class="active">
+                📊 Dashboard
+            </button>
+
+            <button>
+                👥 Employees
+            </button>
+
+            <button>
+                🕒 Attendance
+            </button>
+
+            <button>
+                📅 Leave Requests
+            </button>
+
+            <button>
+                💰 Salary
+            </button>
+
+            <button>
+                📄 Documents
+            </button>
+
+            <button>
+                ⚙️ Settings
+            </button>
+
+        </nav>
+
+
+        <button class="logout-btn"
+                onclick="logoutAdmin()">
+
+            🚪 Logout
+
+        </button>
+
+    </aside>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="admin-main">
+
+
+        <!-- TOP BAR -->
+
+        <div class="admin-topbar">
+
+            <div>
+
+                <h1>
+                    Admin Dashboard
+                </h1>
+
+                <p>
+                    Sakshi Rise Multimedia
+                    Employee Management System
+                </p>
+
+            </div>
+
+
+            <div class="owner-profile">
+
+                <img src="owner-photo.jpg"
+                     alt="Sakshi Kadam">
+
+                <div>
+
+                    <strong>
+                        Sakshi Kadam
+                    </strong>
+
+                    <small>
+                        Owner / Founder
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             STATISTICS
+        ====================================== -->
+
+        <div class="stats">
+
+
+            <div class="stat-card">
+
+                <span>
+                    Total Employees
+                </span>
+
+                <h2>
+                    3
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Present Today
+                </span>
+
+                <h2>
+                    2
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    On Leave
+                </span>
+
+                <h2>
+                    1
+                </h2>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Pending Requests
+                </span>
+
+                <h2>
+                    1
+                </h2>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =====================================
+             DASHBOARD CONTENT
+        ====================================== -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- EMPLOYEES -->
+
+            <div class="dashboard-card">
+
+                <h3>
+                    👥 Employees
+                </h3>
+
+
+                <div class="employee-row">
+
+                    <div class="employee-info">
+
+                        <strong>
+                            Demo Employee
+                        </strong>
+
+                        <small>
+                            EMP001
+                        </small>
+
+                    </div>
+
+                    <span class="status present">
+                        Present
+                    </span>
+
+                </div>
+
+
+                <div class="employee-row">
+
+                    <div class="employee-info">
+
+                        <strong>
+                            Tanmay Patil
+                        </strong>
+
+                        <small>
+                            EMP002
+                        </small>
+
+                    </div>
+
+                    <span class="status present">
+                        Present
+                    </span>
+
+                </div>
+
+
+                <div class="employee-row">
+
+                    <div class="employee-info">
+
+                        <strong>
+                            Employee Three
+                        </strong>
+
+                        <small>
+                            EMP003
+                        </small>
+
+                    </div>
+
+                    <span class="status leave">
+                        Leave
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- OWNER -->
+
+            <div class="dashboard-card">
+
+                <h3>
+                    👑 Owner Profile
+                </h3>
+
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:15px;
+                ">
+
+                    <img src="owner-photo.jpg"
+                         alt="Sakshi Kadam"
+                         style="
+                         width:75px;
+                         height:75px;
+                         border-radius:50%;
+                         object-fit:cover;
+                         ">
+
+
+                    <div>
+
+                        <strong>
+                            Sakshi Kadam
+                        </strong>
+
+                        <p style="
+                            margin:5px 0;
+                            font-size:12px;
+                            color:#6b7280;
+                        ">
+
+                            Owner / Founder
+
+                        </p>
+
+                        <p style="
+                            margin:0;
+                            font-size:11px;
+                            color:#6b7280;
+                        ">
+
+                            Sakshi Rise Multimedia
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+    /* =========================================
+       ADMIN ACCESS CHECK
+    ========================================= */
+
+    const loggedUser =
+        sessionStorage.getItem(
+            "employeeSystemUser"
+        );
+
+
+    if (loggedUser) {
+
+        try {
+
+            const user =
+                JSON.parse(loggedUser);
+
+
+            if (user.type !== "admin") {
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+        }
+
+        catch (error) {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }
+
+
+    /* =========================================
+       LOGOUT
+    ========================================= */
+
+    function logoutAdmin() {
+
+        sessionStorage.removeItem(
+            "employeeSystemUser"
+        );
+
+        window.location.href =
+            "index.html";
+
+    }
+
+</script>
+
+</body>
+</html>
+```
