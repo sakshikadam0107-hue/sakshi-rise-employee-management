@@ -1,249 +1,493 @@
 ```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Employee Management System</title>
+    <title>
+        Employee Management System | Sakshi Rise Multimedia
+    </title>
 
     <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
+
     <div class="login-container">
 
-        <!-- LEFT SIDE -->
-        <div class="login-info">
+
+        <!-- =====================================================
+             LEFT INFORMATION SECTION
+        ====================================================== -->
+
+        <section class="login-info">
+
+
+            <!-- BRAND -->
 
             <div class="brand">
-                <div class="brand-icon">EM</div>
-                <div>
-                    <h2>Employee Management</h2>
-                    <span>Professional HR Portal</span>
+
+                <div class="brand-icon">
+
+                    SR
+
                 </div>
+
+                <div>
+
+                    <h2>
+                        Sakshi Rise Multimedia
+                    </h2>
+
+                    <span>
+                        Employee Management System
+                    </span>
+
+                </div>
+
             </div>
 
+
+            <!-- INFORMATION -->
+
             <div class="info-content">
-                <h1>Manage Your<br><span>Workforce Smarter.</span></h1>
+
+                <h1>
+                    Manage your
+                    <span>
+                        workforce
+                    </span>
+                    smarter.
+                </h1>
+
 
                 <p>
-                    A simple and professional platform to manage
-                    employees, attendance, leaves, documents and more.
+
+                    A professional employee portal for
+                    attendance, leave, salary, documents
+                    and employee management.
+
                 </p>
+
+
+                <!-- FEATURES -->
 
                 <div class="features">
 
-                    <div class="feature">
-                        <div class="feature-icon">✓</div>
-                        <div>
-                            <strong>Employee Management</strong>
-                            <small>Manage employee information easily.</small>
-                        </div>
-                    </div>
 
                     <div class="feature">
-                        <div class="feature-icon">✓</div>
-                        <div>
-                            <strong>Attendance Tracking</strong>
-                            <small>Track check-in and check-out records.</small>
+
+                        <div class="feature-icon">
+                            ✓
                         </div>
+
+                        <div>
+
+                            <strong>
+                                Employee Management
+                            </strong>
+
+                            <small>
+                                Manage employee information easily.
+                            </small>
+
+                        </div>
+
                     </div>
 
+
                     <div class="feature">
-                        <div class="feature-icon">✓</div>
-                        <div>
-                            <strong>Leave Management</strong>
-                            <small>Apply and manage employee leaves.</small>
+
+                        <div class="feature-icon">
+                            ✓
                         </div>
+
+                        <div>
+
+                            <strong>
+                                Attendance & Leave
+                            </strong>
+
+                            <small>
+                                Track attendance and leave requests.
+                            </small>
+
+                        </div>
+
                     </div>
+
+
+                    <div class="feature">
+
+                        <div class="feature-icon">
+                            ✓
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Secure Access
+                            </strong>
+
+                            <small>
+                                Separate employee and admin access.
+                            </small>
+
+                        </div>
+
+                    </div>
+
 
                 </div>
+
             </div>
+
+
+            <!-- COPYRIGHT -->
 
             <div class="copyright">
-                © 2026 Employee Management System
+
+                © 2026 Sakshi Rise Multimedia.
+                All rights reserved.
+
             </div>
 
-        </div>
+
+        </section>
 
 
-        <!-- RIGHT SIDE -->
-        <div class="login-section">
+        <!-- =====================================================
+             LOGIN SECTION
+        ====================================================== -->
+
+        <section class="login-section">
+
 
             <div class="login-card">
 
+
+                <!-- MOBILE BRAND -->
+
                 <div class="mobile-brand">
-                    <div class="brand-icon">EM</div>
-                    <h2>Employee Management</h2>
+
+
+                    <div class="brand-icon">
+
+                        SR
+
+                    </div>
+
+
+                    <div>
+
+                        <h2>
+                            Sakshi Rise Multimedia
+                        </h2>
+
+                    </div>
+
+
                 </div>
+
+
+                <!-- LOGIN HEADER -->
 
                 <div class="login-header">
-                    <h1>Welcome Back 👋</h1>
-                    <p>Sign in to access your account</p>
+
+                    <h1>
+                        Welcome back
+                    </h1>
+
+                    <p>
+                        Sign in to access your account.
+                    </p>
+
                 </div>
 
 
-                <!-- USER TYPE -->
+                <!-- =================================================
+                     USER TYPE
+                ================================================== -->
+
                 <div class="user-type">
 
-                    <button
-                        type="button"
-                        class="user-btn active"
-                        id="employeeBtn"
-                        onclick="selectUserType('employee')">
-                        👤 Employee
-                    </button>
 
                     <button
                         type="button"
-                        class="user-btn"
-                        id="adminBtn"
-                        onclick="selectUserType('admin')">
-                        🛡️ Admin
+                        id="employeeBtn"
+                        class="user-btn active"
+                        onclick="selectUserType('employee')">
+
+                        👤 Employee
+
                     </button>
+
+
+                    <button
+                        type="button"
+                        id="adminBtn"
+                        class="user-btn"
+                        onclick="selectUserType('admin')">
+
+                        👑 Admin
+
+                    </button>
+
 
                 </div>
 
 
-                <!-- LOGIN FORM -->
-                <form id="loginForm" onsubmit="login(event)">
+                <!-- =================================================
+                     LOGIN FORM
+                ================================================== -->
+
+                <form
+                    id="loginForm"
+                    onsubmit="login(event)"
+                    autocomplete="on">
+
+
+                    <!-- USERNAME -->
 
                     <div class="form-group">
 
-                        <label id="userLabel">
+
+                        <label for="username"
+                               id="userLabel">
+
                             Employee ID / Email
+
                         </label>
+
 
                         <div class="input-wrapper">
 
-                            <span class="input-icon">👤</span>
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
 
                             <input
                                 type="text"
                                 id="username"
+                                name="username"
                                 placeholder="Enter Employee ID or Email"
                                 autocomplete="username"
                                 required>
 
+
                         </div>
+
 
                     </div>
 
 
+                    <!-- PASSWORD -->
+
                     <div class="form-group">
 
-                        <label>Password</label>
+
+                        <label for="password">
+
+                            Password
+
+                        </label>
+
 
                         <div class="input-wrapper">
 
-                            <span class="input-icon">🔒</span>
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
 
                             <input
                                 type="password"
                                 id="password"
+                                name="password"
                                 placeholder="Enter your password"
                                 autocomplete="current-password"
                                 required>
 
+
                             <button
                                 type="button"
+                                id="passwordToggle"
                                 class="password-toggle"
                                 onclick="togglePassword()"
-                                aria-label="Show password"
-                                id="passwordToggle">
+                                aria-label="Show or hide password">
+
                                 👁
+
                             </button>
 
+
                         </div>
+
 
                     </div>
 
 
+                    <!-- =================================================
+                         OPTIONS
+                    ================================================== -->
+
                     <div class="login-options">
 
+
                         <label class="remember">
+
+
                             <input
                                 type="checkbox"
-                                id="rememberMe">
+                                id="rememberMe"
+                                name="rememberMe">
 
-                            <span>Remember me</span>
+
+                            <span>
+                                Remember me
+                            </span>
+
+
                         </label>
+
 
                         <a
                             href="#"
                             onclick="forgotPassword(event)">
-                            Forgot Password?
+
+                            Forgot password?
+
                         </a>
+
 
                     </div>
 
 
+                    <!-- =================================================
+                         LOGIN BUTTON
+                    ================================================== -->
+
                     <button
                         type="submit"
-                        class="login-btn"
-                        id="loginBtn">
+                        id="loginBtn"
+                        class="login-btn">
 
-                        <span id="loginBtnText">Login as Employee</span>
+
+                        <span id="loginBtnText">
+
+                            Login as Employee
+
+                        </span>
+
 
                     </button>
+
 
                 </form>
 
 
-                <!-- MESSAGE -->
+                <!-- =================================================
+                     MESSAGE
+                ================================================== -->
+
                 <div
                     id="message"
-                    class="message">
+                    class="message"
+                    role="alert"
+                    aria-live="polite">
+
                 </div>
 
 
-                <!-- DEMO LOGIN -->
+                <!-- =================================================
+                     DEMO LOGIN
+                ================================================== -->
+
                 <div class="demo-box">
 
+
                     <div class="demo-title">
-                        Demo Login
-                    </div>
 
-                    <div id="demoCredentials">
-
-                        <p>
-                            <strong>Employee:</strong>
-                            EMP001 / employee123
-                        </p>
-
-                        <p>
-                            <strong>Admin:</strong>
-                            admin / admin123
-                        </p>
+                        Demo Account
 
                     </div>
+
+
+                    <p>
+
+                        <strong>
+                            Employee:
+                        </strong>
+
+                        EMP001 /
+                        employee123
+
+                    </p>
+
+
+                    <p>
+
+                        <strong>
+                            Admin:
+                        </strong>
+
+                        sakshiadmin /
+                        Admin@2026
+
+                    </p>
+
 
                     <button
                         type="button"
-                        onclick="fillDemoCredentials()"
-                        class="demo-btn">
-                        Use Demo Credentials
+                        class="demo-btn"
+                        onclick="fillDemoCredentials()">
+
+                        Fill Demo Credentials
+
                     </button>
 
+
                 </div>
 
+
+                <!-- SECURITY -->
 
                 <div class="security-note">
-                    🔐 Your login information is protected.
+
+                    🔒 Your login session is protected
+                    for this demonstration.
+
                 </div>
+
 
             </div>
 
-        </div>
+
+        </section>
+
 
     </div>
 
 
+    <!-- =========================================================
+         APP JAVASCRIPT
+    ========================================================== -->
+
     <script src="app.js"></script>
 
+
 </body>
+
 </html>
 ```
