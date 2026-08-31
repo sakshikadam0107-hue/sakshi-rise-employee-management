@@ -1,25 +1,18 @@
-
-/* =========================================
+```javascript
+/* =====================================================
+   SAKSHI RISE MULTIMEDIA
    EMPLOYEE MANAGEMENT SYSTEM
-   STEP 1 - LOGIN SYSTEM
-   MULTIPLE EMPLOYEES + ADMINS
-========================================= */
-
-
-/* =========================================
-   CURRENT USER TYPE
-========================================= */
+   LOGIN SYSTEM
+===================================================== */
 
 let currentUserType = "employee";
 
 
-/* =========================================
+/* =====================================================
    EMPLOYEE ACCOUNTS
-   Add as many employees as you want.
-========================================= */
+===================================================== */
 
 const employees = [
-
     {
         username: "EMP001",
         email: "employee1@example.com",
@@ -40,17 +33,14 @@ const employees = [
         password: "Employee@123",
         name: "Employee Three"
     }
-
 ];
 
 
-/* =========================================
+/* =====================================================
    ADMIN ACCOUNTS
-   Add as many admins as you want.
-========================================= */
+===================================================== */
 
 const admins = [
-
     {
         username: "admin",
         email: "admin@example.com",
@@ -64,13 +54,12 @@ const admins = [
         password: "Admin@2026",
         name: "Sakshi Kadam"
     }
-
 ];
 
 
-/* =========================================
-   SELECT USER TYPE
-========================================= */
+/* =====================================================
+   SELECT EMPLOYEE / ADMIN
+===================================================== */
 
 function selectUserType(type) {
 
@@ -92,10 +81,19 @@ function selectUserType(type) {
         document.getElementById("loginBtnText");
 
 
+    if (!employeeBtn ||
+        !adminBtn ||
+        !userLabel ||
+        !usernameInput ||
+        !loginBtnText) {
+
+        return;
+    }
+
+
     if (type === "employee") {
 
         employeeBtn.classList.add("active");
-
         adminBtn.classList.remove("active");
 
         userLabel.textContent =
@@ -112,7 +110,6 @@ function selectUserType(type) {
     else {
 
         adminBtn.classList.add("active");
-
         employeeBtn.classList.remove("active");
 
         userLabel.textContent =
@@ -126,17 +123,15 @@ function selectUserType(type) {
 
     }
 
-
     clearMessage();
 
     usernameInput.focus();
-
 }
 
 
-/* =========================================
+/* =====================================================
    PASSWORD SHOW / HIDE
-========================================= */
+===================================================== */
 
 function togglePassword() {
 
@@ -147,11 +142,18 @@ function togglePassword() {
         document.getElementById("passwordToggle");
 
 
+    if (!passwordInput) {
+        return;
+    }
+
+
     if (passwordInput.type === "password") {
 
         passwordInput.type = "text";
 
-        toggleButton.textContent = "🙈";
+        if (toggleButton) {
+            toggleButton.textContent = "🙈";
+        }
 
     }
 
@@ -159,113 +161,127 @@ function togglePassword() {
 
         passwordInput.type = "password";
 
-        toggleButton.textContent = "👁";
+        if (toggleButton) {
+            toggleButton.textContent = "👁";
+        }
 
     }
-
 }
 
 
-/* =========================================
+/* =====================================================
    FIND USER
-========================================= */
+===================================================== */
 
 function findUser(username, password) {
 
-    const userList =
+    const list =
         currentUserType === "employee"
             ? employees
             : admins;
 
 
-    return userList.find(function (user) {
+    const enteredUsername =
+        username.trim().toLowerCase();
+
+
+    return list.find(function (user) {
 
         const usernameMatch =
-            username.toLowerCase() ===
-                user.username.toLowerCase()
+            user.username.toLowerCase() ===
+                enteredUsername
             ||
-            username.toLowerCase() ===
-                user.email.toLowerCase();
+            user.email.toLowerCase() ===
+                enteredUsername;
 
 
         const passwordMatch =
-            password === user.password;
+            user.password === password;
 
 
         return usernameMatch && passwordMatch;
-
     });
-
 }
 
 
-/* =========================================
+/* =====================================================
    LOGIN
-========================================= */
+===================================================== */
 
 function login(event) {
 
-    event.preventDefault();
+    if (event) {
+        event.preventDefault();
+    }
 
 
-    const username =
-        document
-            .getElementById("username")
-            .value
-            .trim();
+    const usernameInput =
+        document.getElementById("username");
 
+    const passwordInput =
+        document.getElementById("password");
 
-    const password =
-        document
-            .getElementById("password")
-            .value;
-
-
-    const rememberMe =
-        document
-            .getElementById("rememberMe")
-            .checked;
-
+    const rememberInput =
+        document.getElementById("rememberMe");
 
     const loginButton =
         document.getElementById("loginBtn");
-
 
     const loginButtonText =
         document.getElementById("loginBtnText");
 
 
-    /* =====================================
-       EMPTY FIELD CHECK
-    ===================================== */
+    if (!usernameInput || !passwordInput) {
+
+        alert(
+            "Login form could not be found."
+        );
+
+        return;
+    }
+
+
+    const username =
+        usernameInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+
+    const rememberMe =
+        rememberInput
+            ? rememberInput.checked
+            : false;
+
+
+    /* EMPTY CHECK */
 
     if (!username || !password) {
 
         showMessage(
-            "Please enter your username/email and password.",
+            "Please enter your ID/email and password.",
             "error"
         );
 
         return;
-
     }
 
 
-    /* =====================================
-       LOADING
-    ===================================== */
+    /* LOADING */
 
-    loginButton.disabled = true;
-
-    loginButton.classList.add("loading");
-
-    loginButtonText.textContent =
-        "Checking login...";
+    if (loginButton) {
+        loginButton.disabled = true;
+        loginButton.classList.add("loading");
+    }
 
 
-    /* =====================================
-       FIND ACCOUNT
-    ===================================== */
+    if (loginButtonText) {
+        loginButtonText.textContent =
+            "Checking login...";
+    }
+
+
+    /* CHECK ACCOUNT */
 
     setTimeout(function () {
 
@@ -273,12 +289,11 @@ function login(event) {
             findUser(username, password);
 
 
-        /* =================================
-           LOGIN SUCCESS
-        ================================= */
+        /* =================================================
+           SUCCESS
+        ================================================= */
 
         if (user) {
-
 
             const loginData = {
 
@@ -296,9 +311,7 @@ function login(event) {
             };
 
 
-            /* =============================
-               SAVE SESSION
-            ============================= */
+            /* SAVE LOGIN SESSION */
 
             sessionStorage.setItem(
                 "employeeSystemUser",
@@ -306,9 +319,7 @@ function login(event) {
             );
 
 
-            /* =============================
-               REMEMBER USERNAME
-            ============================= */
+            /* REMEMBER USERNAME */
 
             if (rememberMe) {
 
@@ -328,152 +339,149 @@ function login(event) {
             }
 
 
-            /* =============================
-               SUCCESS MESSAGE
-            ============================= */
-
             showMessage(
-                "Login successful! Redirecting...",
+                "Login successful! Opening dashboard...",
                 "success"
             );
 
 
-            loginButtonText.textContent =
-                "Login Successful";
+            if (loginButtonText) {
+
+                loginButtonText.textContent =
+                    "Login Successful";
+
+            }
 
 
-            /* =============================
+            /* =================================================
                REDIRECT
-            ============================= */
+            ================================================= */
 
             setTimeout(function () {
 
-
                 if (currentUserType === "employee") {
 
-                    window.location.href =
-                        "employee.html";
+                    window.location.assign(
+                        "./employee.html"
+                    );
 
                 }
 
                 else {
 
-                    window.location.href =
-                        "admin.html";
+                    window.location.assign(
+                        "./admin.html"
+                    );
 
                 }
 
-
-            }, 900);
-
+            }, 700);
 
         }
 
 
-        /* =================================
-           LOGIN FAILED
-        ================================= */
+        /* =================================================
+           WRONG LOGIN
+        ================================================= */
 
         else {
 
-
             showMessage(
-                "Invalid login details. Please check your username/email and password.",
+                "Invalid ID/email or password.",
                 "error"
             );
 
 
-            loginButton.disabled = false;
+            if (loginButton) {
 
-            loginButton.classList.remove("loading");
+                loginButton.disabled = false;
+
+                loginButton.classList.remove(
+                    "loading"
+                );
+
+            }
 
 
-            loginButtonText.textContent =
-                currentUserType === "employee"
-                    ? "Login as Employee"
-                    : "Login as Admin";
+            if (loginButtonText) {
 
+                loginButtonText.textContent =
+                    currentUserType === "employee"
+                        ? "Login as Employee"
+                        : "Login as Admin";
+
+            }
 
         }
 
-
-    }, 600);
-
+    }, 500);
 }
 
 
-/* =========================================
-   DEMO CREDENTIAL BUTTON
-========================================= */
+/* =====================================================
+   DEMO CREDENTIALS
+===================================================== */
 
 function fillDemoCredentials() {
 
-    let user;
-
-
-    if (currentUserType === "employee") {
-
-        user = employees[0];
-
-    }
-
-    else {
-
-        user = admins[0];
-
-    }
+    const user =
+        currentUserType === "employee"
+            ? employees[0]
+            : admins[0];
 
 
     if (!user) {
-
-        showMessage(
-            "No demo account is available.",
-            "error"
-        );
-
         return;
-
     }
 
 
-    document.getElementById(
-        "username"
-    ).value = user.username;
+    const usernameInput =
+        document.getElementById("username");
+
+    const passwordInput =
+        document.getElementById("password");
 
 
-    document.getElementById(
-        "password"
-    ).value = user.password;
+    if (usernameInput) {
+        usernameInput.value =
+            user.username;
+    }
+
+
+    if (passwordInput) {
+        passwordInput.value =
+            user.password;
+    }
 
 
     showMessage(
-        "Demo credentials filled. Click Login to continue.",
+        "Demo credentials filled. Click Login.",
         "info"
     );
-
 }
 
 
-/* =========================================
+/* =====================================================
    FORGOT PASSWORD
-========================================= */
+===================================================== */
 
 function forgotPassword(event) {
 
-    event.preventDefault();
+    if (event) {
+        event.preventDefault();
+    }
 
 
     showMessage(
-        "Password recovery will be connected to the real authentication system later.",
+        "Password recovery will be added when real authentication is connected.",
         "info"
     );
-
 }
 
 
-/* =========================================
+/* =====================================================
    SHOW MESSAGE
-========================================= */
+===================================================== */
 
 function showMessage(text, type) {
 
@@ -481,18 +489,24 @@ function showMessage(text, type) {
         document.getElementById("message");
 
 
-    message.textContent = text;
+    if (!message) {
 
+        alert(text);
+
+        return;
+    }
+
+
+    message.textContent = text;
 
     message.className =
         "message " + type;
-
 }
 
 
-/* =========================================
+/* =====================================================
    CLEAR MESSAGE
-========================================= */
+===================================================== */
 
 function clearMessage() {
 
@@ -500,56 +514,53 @@ function clearMessage() {
         document.getElementById("message");
 
 
+    if (!message) {
+        return;
+    }
+
+
     message.textContent = "";
 
-    message.className = "message";
-
+    message.className =
+        "message";
 }
 
 
-/* =========================================
-   GET CURRENT LOGGED-IN USER
-   Useful for employee.html/admin.html
-========================================= */
+/* =====================================================
+   GET LOGGED-IN USER
+===================================================== */
 
 function getLoggedInUser() {
 
-    const userData =
+    const data =
         sessionStorage.getItem(
             "employeeSystemUser"
         );
 
 
-    if (!userData) {
-
+    if (!data) {
         return null;
-
     }
 
 
     try {
 
-        return JSON.parse(userData);
+        return JSON.parse(data);
 
     }
 
     catch (error) {
 
-        console.error(
-            "Unable to read login session:",
-            error
-        );
+        console.error(error);
 
         return null;
-
     }
-
 }
 
 
-/* =========================================
+/* =====================================================
    LOGOUT
-========================================= */
+===================================================== */
 
 function logoutUser() {
 
@@ -558,54 +569,51 @@ function logoutUser() {
     );
 
 
-    window.location.href =
-        "index.html";
-
+    window.location.assign(
+        "./index.html"
+    );
 }
 
 
-/* =========================================
-   LOAD REMEMBERED USERNAME
-========================================= */
+/* =====================================================
+   REMEMBER USERNAME
+===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
-
-        const rememberedUsername =
+        const remembered =
             localStorage.getItem(
                 "rememberedUsername"
             );
 
 
-        if (rememberedUsername) {
-
-            const usernameInput =
-                document.getElementById(
-                    "username"
-                );
+        const usernameInput =
+            document.getElementById(
+                "username"
+            );
 
 
-            const rememberCheckbox =
-                document.getElementById(
-                    "rememberMe"
-                );
+        const rememberCheckbox =
+            document.getElementById(
+                "rememberMe"
+            );
 
 
-            if (usernameInput) {
+        if (remembered && usernameInput) {
 
-                usernameInput.value =
-                    rememberedUsername;
+            usernameInput.value =
+                remembered;
 
-            }
+        }
 
 
-            if (rememberCheckbox) {
+        if (remembered &&
+            rememberCheckbox) {
 
-                rememberCheckbox.checked = true;
-
-            }
+            rememberCheckbox.checked =
+                true;
 
         }
 
