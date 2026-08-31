@@ -1,4 +1,4 @@
-```javascript
+
 /* =========================================
    EMPLOYEE MANAGEMENT SYSTEM
    STEP 1 - LOGIN SYSTEM
